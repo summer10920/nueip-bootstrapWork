@@ -121,12 +121,14 @@ function refreshTable(data) {
         // HTMLCollection to an Array, map innhtml to ary
         const ary = [].slice.call(node.closest("tr").children).map(item => item.innerHTML);
 
-        document.querySelector("#modalMdy [name=cnname]").value = ary[0];
-        document.querySelector("#modalMdy [name=enname]").value = ary[1];
-        document.querySelector("#modalMdy #mosex0").checked = ary[2] === "男";
-        document.querySelector("#modalMdy #mosex1").checked = ary[2] === "女";
-        document.querySelector("#modalMdy [name=phone]").value = ary[3];
-        document.querySelector("#modalMdy [name=mail]").value = ary[4];
+        document.querySelector("#modalMdy [name=cnname]").setAttribute('value', ary[0]);
+        document.querySelector("#modalMdy [name=enname]").setAttribute('value', ary[1]);
+        if (ary[2] === "男") document.querySelector("#modalMdy #mosex0").setAttribute('checked', 'checked');
+        else document.querySelector("#modalMdy #mosex0").removeAttribute('checked');
+        if (ary[2] === "女") document.querySelector("#modalMdy #mosex1").setAttribute('checked', 'checked');
+        else document.querySelector("#modalMdy #mosex1").removeAttribute('checked');
+        document.querySelector("#modalMdy [name=phone]").setAttribute('value', ary[3]);
+        document.querySelector("#modalMdy [name=mail]").setAttribute('value', ary[4]);
         document.querySelector("#modalMdy form").dataset.uid = node.dataset.uid;
         self.modalMdy.show();
       };
