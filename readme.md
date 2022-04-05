@@ -88,9 +88,9 @@
 
 ## 增加自定特效，並說明其內容 （需 4 個特效，1 個佔 25%)
 
-1. 優化 - Popovers 互動
-增加題目要求之外，提供點選非 Popovers 指定處進行自動關閉。
-![](https://imgur.com/QTqoxei.gif)
+1. 過場 - Ajax 請求與結束
+針對 Ajax 多筆資料（全部 or 搜索）載入前後添加 Loading 動畫
+![](https://imgur.com/8czduwo.gif)
 
 2. 標題互動 - 使用偽元素與 background-clip 操作，完成同時字底雙變化效果。
 ![](https://imgur.com/kZxk30A.gif)
@@ -98,12 +98,15 @@
 3. 文字動畫 - 小趣味，發生未預期結果時提供緩和的尷尬感。
 ![](https://imgur.com/dBmKi8h.gif)
 
-4. 響應式的滾軸提供 - 因表格的響應缺點，在指定寬度下改提供Scroll Bar來瀏覽表格。
+4. 響應式的滾軸提供 - 因表格的響應缺點，在指定寬度下改提供 Scroll Bar 來瀏覽表格。
 ![](https://imgur.com/IkF0Wyc.gif)
 
+5. 優化 - Popovers 互動
+增加題目要求之外，提供點選非 Popovers 指定處進行自動關閉。
+![](https://imgur.com/QTqoxei.gif)
 
 ```txt
 ※ 美化：選擇要表達的感覺/主題，然後訂定風格、確定配色
 ※ 本範例為前端工程師練習題，只專注版面、美化、頁面行為，不需管後端資料
-※ 頁面編碼: UTF-8
+※ 頁面編碼：UTF-8
 ```

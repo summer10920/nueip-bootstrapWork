@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const load = document.createElement('div');
       load.classList.add('load');
       load.innerHTML = `
-        <svg>
+        <svg width="175" height="40">
           <g transform="translate(-6242 170)">
             <g transform="translate(173.561 10.206)">
               <g transform="translate(6068.439 -180.206)">
