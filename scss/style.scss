@@ -1,0 +1,241 @@
+$yellow-0:#ffe69c00;
+$yellow-100:#fff3cd;
+$yellow-200:#ffe69c;
+$yellow-300:#ffda6a;
+$yellow-400:#ffcd39;
+$yellow-500:#ffc107;
+$yellow-600:#cc9a06;
+$yellow-700:#997404;
+$yellow-800:#664d03;
+$yellow-900:#332701;
+
+body {
+  font-family: 'Roboto', 'Noto Sans TC', sans-serif;
+}
+
+header>h1 {
+  border-left: 5px solid $yellow-400;
+  padding: 10px 5px;
+  display: inline;
+  position: relative;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(45deg, white, white);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-color: $yellow-700;
+  transition: 0.5s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 100%;
+    top: 0;
+    bottom: 0;
+    background: $yellow-400;
+    z-index: -1;
+    transition: 0.5s;
+  }
+
+  &:hover {
+    background-size: 100% 100%;
+
+    &::before {
+      right: -10px;
+    }
+  }
+}
+
+fieldset.noreboot {
+  border: 2px groove;
+  padding: 20px;
+
+  >legend {
+    float: none;
+    width: auto;
+    padding: 10px;
+  }
+}
+
+.form-check-input {
+  &:checked {
+    background-color: $yellow-500;
+    border-color: $yellow-500;
+  }
+
+  &:focus {
+    border-color: $yellow-100;
+    box-shadow: 0 0 0 0.25rem rgba($yellow-100, 25%);
+  }
+}
+
+.form-control:focus {
+  border-color: $yellow-200;
+  box-shadow: 0 0 0 0.25rem rgba($yellow-300, 0.25);
+}
+
+.table {
+  overflow: hidden;
+
+  // Highlight border color between thead, tbody and tfoot.
+  > :not(:first-child) {
+    border-top-color: $yellow-400;
+  }
+
+  tr {
+    transition: 0.5s;
+
+    &:hover {
+      background-color: $yellow-200;
+    }
+
+    th {
+      color: $yellow-700;
+    }
+
+    th:nth-last-child(1) {
+      width: 8rem;
+    }
+
+    th,
+    td {
+      position: relative;
+    }
+
+    th::after,
+    td::after {
+      content: '';
+      background-color: $yellow-200;
+      height: 100vh;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: -50vh;
+      z-index: -1;
+      opacity: 0;
+      transition: 0.5s;
+    }
+
+    th:hover::after,
+    td:hover::after {
+      opacity: 1;
+    }
+  }
+
+  min-width: 720px;
+
+  &::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: $yellow-300;
+    border: 1px solid $yellow-500;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px rgba($yellow-500, 0.5);
+    // border-radius: 10px;
+    background-color: $yellow-100;
+  }
+}
+
+.scrollbox {
+  margin: 0;
+  // width: 100%;
+  // flex: 0 0 90%;
+  // overflow: auto;
+  // padding-bottom: 20px;
+
+  // display: flex;
+  // flex-wrap: wrap;
+  // align-content: flex-start;
+  &::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: $yellow-300;
+    border: 1px solid $yellow-500;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px rgba($yellow-500, 0.5);
+    // border-radius: 10px;
+    background-color: $yellow-100;
+  }
+}
+
+article.scrollbox {
+  overflow-x: auto;
+}
+
+.nodata {
+  height: 250px;
+  vertical-align: middle;
+  position: relative;
+
+  >span {
+    position: relative;
+
+    &::before {
+      content: '(PД\`q。)·。\'゜';
+      width: 50%;
+      position: absolute;
+      animation: runcry 10s infinite forwards;
+      top: -30px;
+    }
+  }
+}
+
+@keyframes runcry {
+
+  0%,
+  5%,
+  100% {
+    transform: translate(0, 0) scaleX(1);
+    left: 0;
+  }
+
+  2%,
+  7% {
+    transform: translate(0, -10px) scaleX(1);
+  }
+
+  10% {
+    transform: translate(0, 0px) scaleX(-1);
+    left: 0;
+  }
+
+  50%,
+  55% {
+    transform: translate(0, 0) scaleX(-1);
+    left: 50%;
+  }
+
+  52%,
+  57% {
+    transform: translate(0, -10px) scaleX(-1);
+  }
+
+  60% {
+    transform: translate(0, 0) scaleX(1);
+    left: 50%;
+  }
+}
+
+.btn-mdy:hover {
+  color: #fff;
+  background-color: $yellow-500;
+  border-color: $yellow-500;
+}
+
+.btn-del:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}

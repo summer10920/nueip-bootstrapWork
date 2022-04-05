@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hello World">
+  <title>個人資料表</title>
+
+  <!-- css -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"
+    integrity="sha512-pax4MlgXjHEPfCwcJLQhigY7+N8rt6bVvWLFyUMuxShv170X53TRzGPmPkZmGBhk+jikR8WBM4yl7A9WMHHqvg=="
+    crossorigin="anonymous"></script>
+  <script src="demo.js"></script>
+
+</head>
+
+<body class="py-5">
+
+  <header class="container mb-4">
+    <h1>個人資料表</h1>
+  </header>
+
+  <section class="container mb-5">
+    <header class="mb-3 btn-toolbar justify-content-end">
+      <button id="addbutton" class="btn btn-sm btn-outline-dark me-2">新增</button>
+      <form class="input-group input-group-sm">
+        <input type="text" class="form-control" placeholder="提供任一完整字段...">
+        <button id="srhbutton" class="btn btn-sm btn-dark" type="submit">搜尋</button>
+      </form>
+    </header>
+    <article class="scrollbox">
+      <table id="cardtable" class="table table-striped text-center">
+        <thead>
+          <tr class="text-warning">
+            <th>中文名字</th>
+            <th>英文名字</th>
+            <th>性別</th>
+            <th>手機</th>
+            <th>電子信箱</th>
+            <th>修改/刪除</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </article>
+  </section>
+
+  <section class="container">
+    <fieldset class="noreboot">
+      <legend>人易科技 前端上機測驗題</legend>
+      <pre class="scrollbox">
+        環境：
+        將資料夾放到網頁伺服器中，用瀏覽器執行 http://網址/demo/index.html
+        要求：
+        1. 美化它，並說明要表達的感覺/主題，訂定的風格、配色
+        2. 將index.html中的js程式碼分離成檔案demo.js，並增加style.css檔案
+        3. 刪除鍵補上確認Dialog，且新增/修改/刪除的dialog使用bootstrap Modal實現 (bootstrap取代jQueryUI)
+        4. 表格(table)奇偶數列而有不同的底色，且滑鼠移到表格資料上時，以滑鼠指到的格子為中心，十字線上的 列/欄 都要變色 (列欄變色各得分50%)
+        | | 色 | | |
+        | 色 | 鼠 | 色 | 色 |
+        | | 色 | | |
+        | | 色 | | |
+        5. 加二個欄位: 手機,電子信箱，並實作 欄位驗証及錯誤訊息顯示
+        - 必填：中文姓名、手機、信箱、性別
+        - 格式：手機、信箱
+        > ※ 註：手機填寫時為10碼數字，格式後面處理
+        > ※ 註：清單及編輯表單都要做
+        6. 特效實作 & 資料處理
+        - bootstrap tooltip：滑鼠「移到」人名上面時，顯示說明文字，內容格式： [性別]中文名子(英文名子) (字串串接)
+        - bootstrap popover：滑鼠「點擊」手機上面時，顯示手機資訊，內容格式： 聯絡方式：xxxx-xxx-xxx (字串格式轉換)
+        7. 實作bootstrap RWD效果
+        8. 提高Javascript檔物件化程度
+        9. 實作ajax
+        10. 增加自定特效，並說明其內容 (需4個特效，1個佔25%)
+
+
+        ※ 美化：選擇要表達的感覺/主題，然後訂定風格、確定配色
+        ※ 本範例為前端工程師練習題，只專注版面、美化、頁面行為，不需管後端資料
+        ※ 頁面編碼: UTF-8
+      </pre>
+    </fieldset>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalDel" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          確定刪除此資料嗎?
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-danger">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="modalMdy" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <form class="modal-content" method="POST">
+        <div class="modal-header alert-secondary px-4">
+          <h5 class="modal-title">修改表單</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body px-4">
+          <div class="row mb-3">
+            <label for="cnname" class="col-sm-3 col-form-label">中文姓名</label>
+            <div class="col-sm-9">
+              <input required type="text" class="form-control" name="cnname" id="cnname">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="enname" class="col-sm-3 col-form-label">英文姓名</label>
+            <div class="col-sm-9">
+              <input required type="text" class="form-control" id="enname" name="enname">
+            </div>
+          </div>
+          <fieldset class="row mb-3">
+            <legend class="col-form-label col-sm-3 pt-0">性別</legend>
+            <div class="col-sm-9">
+              <div class="form-check">
+                <input required class="form-check-input" type="radio" name="sex" id="mosex0" value="0" checked>
+                <label class="form-check-label" for="mosex0">男</label>
+              </div>
+              <div class="form-check">
+                <input required class="form-check-input" type="radio" name="sex" id="mosex1" value="1">
+                <label class="form-check-label" for="mosex1">女</label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="row mb-3">
+            <label for="phone" class="col-sm-3 col-form-label">手機</label>
+            <div class="col-sm-9">
+              <input required type="text" class="form-control" name="phone" id="phone" pattern="[0-9]{10}"
+                data-txt="為10碼數字">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="mail" class="col-sm-3 col-form-label">電子信箱</label>
+            <div class="col-sm-9">
+              <input required type="text" class="form-control" id="mail" name="mail" pattern="^\w+@\w+\.\w+(\.\w+)*"
+                data-txt="需包含「@」及至少 1 個「.」">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center px-4">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="reset" class="btn btn-secondary">重新填寫</button>
+          <button type="submit" class="btn btn-warning text-white">修改</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal fade" id="modalAdd" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <form class="modal-content" method="POST">
+        <div class="modal-header alert-secondary px-4">
+          <h5 class="modal-title">新增表單</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body px-4">
+          <div class="row mb-3">
+            <label for="cnnameadd" class="col-sm-3 col-form-label">中文姓名</label>
+            <div class="col-sm-9">
+              <input required type="text" class="form-control" name="cnname" id="cnnameadd">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="ennameadd" class="col-sm-3 col-form-label">英文姓名</label>
+            <div class="col-sm-9">
+              <input required type="text" class="form-control" name="enname" id="ennameadd">
+            </div>
+          </div>
+          <fieldset class="row mb-3">
+            <legend class="col-form-label col-sm-3 pt-0">性別</legend>
+            <div class="col-sm-9">
+              <div class="form-check">
+                <input required class="form-check-input" type="radio" name="sex" id="mosex0new" value="0" checked>
+                <label class="form-check-label" for="mosex0new">男</label>
+              </div>
+              <div class="form-check">
+                <input required class="form-check-input" type="radio" name="sex" id="mosex1new" value="1">
+                <label class="form-check-label" for="mosex1new">女</label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="row mb-3">
+            <label for="phoneadd" class="col-sm-3 col-form-label">手機</label>
+            <div class="col-sm-9">
+              <input required type="text" class="form-control" name="phone" id="phoneadd" pattern="[0-9]{10}"
+                data-txt="為10碼數字">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="mailadd" class="col-sm-3 col-form-label">電子信箱</label>
+            <div class="col-sm-9">
+              <input required type="text" class="form-control" id="mailadd" name="mail" pattern="^\w+@\w+\.\w+(\.\w+)*"
+                data-txt="需包含「@」及至少 1 個「.」">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center px-4">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="reset" class="btn btn-secondary">重新填寫</button>
+          <button type="submit" class="btn btn-warning text-white">新增</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>
