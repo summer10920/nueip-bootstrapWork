@@ -130,7 +130,7 @@ let ajaxObject = {
       let url = null;
       //get all or filter
       url = (!keyword) ?
-        ('/ajax/sql.json' || 'ajax/users') :
+        ('./ajax/sql.json' || '/ajax/users') :
         (`ajax/users?filter=${keyword}`);
 
       const res = await fetch(url);
