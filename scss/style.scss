@@ -239,3 +239,35 @@ article.scrollbox {
   background-color: #dc3545;
   border-color: #dc3545;
 }
+
+
+// loading
+.load {
+  background: #eeee;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  opacity: 0;
+  transition: 0.5s opacity;
+
+  #Group_34>path {
+    animation: light 0.5s ease-in-out infinite;
+    animation-delay: calc(var(--i)* 0.05s);
+  }
+}
+
+@keyframes light {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
